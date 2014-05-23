@@ -23,6 +23,7 @@ public:
 
     void operator=(Polynom poly);
     void operator=(std::string value);
+    Polynom operator+(Polynom poly);
 
     void print();
 };

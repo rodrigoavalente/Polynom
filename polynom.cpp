@@ -73,6 +73,20 @@ void Polynom::operator =(std::string value)
     this->init(value);
 }
 
+Polynom Polynom::operator +(Polynom poly)
+{
+    int dif;
+    Polynom ret;
+
+    if(this->degree > poly.degree)
+    {
+        dif = this->degree - poly.degree;
+        ret.init(this->degree);
+        for (int i = dif; i < ret.degree; i++)
+
+    }
+}
+
 void Polynom::print()
 {
     for(int i = 0; i < this->degree; i++)
