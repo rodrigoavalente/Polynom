@@ -2,7 +2,7 @@
 
 Polynom::Polynom()
 {
-    this->degree = 0;
+
 }
 
 Polynom::Polynom(int length)
@@ -17,7 +17,7 @@ Polynom::Polynom(std::string value)
 
 Polynom::~Polynom()
 {
-    free(this->poly);
+//    free(this->poly);
 }
 
 void Polynom::init(int length)
@@ -75,21 +75,98 @@ void Polynom::operator =(std::string value)
 
 Polynom Polynom::operator +(Polynom poly)
 {
-    int dif;
+
     Polynom ret;
 
     if(this->degree > poly.degree)
     {
-        dif = this->degree - poly.degree;
+        poly = resize(this->degree, poly);
         ret.init(this->degree);
-        for (int i = dif; i < ret.degree; i++)
-
+        for (int i = 0; i < this->degree; i++)
+                ret.poly[i] = this->poly[i] + poly.poly[i];
     }
+    else if (poly.degree > this->degree)
+    {
+        poly = resize(poly.degree, poly);
+        ret.init(poly.degree);
+        for (int i = 0; i < poly.degree; i++)
+                ret.poly[i] = this->poly[i] + poly.poly[i];
+    }
+    else
+    {
+        ret.init(this->degree);
+        for(int i = 0; i < ret.degree; i++)
+            ret.poly[i] = this->poly[i] + poly.poly[i];
+    }
+
+    return ret;
+}
+
+Polynom Polynom::operator +(float value)
+{
+    Polynom ret(this->degree);
+
+    ret.poly = this->poly;
+    ret.poly[ret.degree - 1] =  ret.poly[ret.degree - 1] + value;
+
+    return ret;
+}
+
+Polynom Polynom::operator -(Polynom poly)
+{
+    Polynom ret;
+
+    if(this->degree > poly.degree)
+    {
+        poly = resize(this->degree, poly);
+        ret.init(this->degree);
+        for (int i = 0; i < this->degree; i++)
+                ret.poly[i] = this->poly[i] - poly.poly[i];
+    }
+    else if (poly.degree > this->degree)
+    {
+        poly = resize(poly.degree, poly);
+        ret.init(poly.degree);
+        for (int i = 0; i < poly.degree; i++)
+                ret.poly[i] = this->poly[i] - poly.poly[i];
+    }
+    else
+    {
+        ret.init(this->degree);
+        for(int i = 0; i < ret.degree; i++)
+            ret.poly[i] = this->poly[i] - poly.poly[i];
+    }
+
+    return ret;
+}
+
+Polynom Polynom::operator -(float value)
+{
+    Polynom ret(this->degree);
+
+    ret.poly = this->poly;
+    ret.poly[ret.degree - 1] =  ret.poly[ret.degree - 1] - value;
+
+    return ret;
+}
+
+Polynom resize(int newsize, Polynom poly)
+{
+    Polynom temp;
+
+    temp = poly;
+    poly.init(newsize);
+    for (int i = temp.degree; i > 0; i--)
+        poly.poly[temp.degree - i + 1] = temp.poly[temp.degree - i];
+    return poly;
 }
 
 void Polynom::print()
 {
-    for(int i = 0; i < this->degree; i++)
-        std::cout<<this->poly[i]<<" ";
+    for(int i = this->degree; i > 0; i--)
+        if (this->poly[i] > 0)
+            std::cout<<"+"<<this->poly[i-1]<<"x^"<<(this->degree - i)<<" ";
+        else
+            std::cout<<this->poly[i-1]<<"x^"<<(this->degree - i)<<" ";
     std::cout<<"\n";
 }

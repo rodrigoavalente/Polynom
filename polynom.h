@@ -24,6 +24,12 @@ public:
     void operator=(Polynom poly);
     void operator=(std::string value);
     Polynom operator+(Polynom poly);
+    Polynom operator+(float value);
+    Polynom operator-(Polynom poly);
+    Polynom operator-(float value);
+
+
+    friend Polynom resize(int newsize, Polynom poly);
 
     void print();
 };
