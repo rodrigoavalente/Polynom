@@ -1,4 +1,5 @@
 #include "polynom.h"
+
 template <class TypeOfClass>
 Polynom<TypeOfClass>::Polynom()
 {
@@ -14,21 +15,33 @@ Polynom<TypeOfClass>::Polynom(int Num, int Den)
 template <class TypeOfClass>
 Polynom<TypeOfClass>::Polynom(std::string Num, std::string Den)
 {
-    this->init(Num, Den);
+    init(Num, Den);
 }
 
 template <class TypeOfClass>
-Polynom<TypeOfClass>::Polynom(const Polynom<TypeOfClass> &CopyPolynom)
+Polynom<TypeOfClass>::Polynom(std::string Num)
 {
-    this->num = initPointer(CopyPolynom.sizeNum);
-    this->den = initPointer(CopyPolynom.sizeDen);
-
-    for(int i = 0; i < this->sizeNum; i++)
-        this->num[i] = CopyPolynom.num[i];
-
-    for(int i = 0; i < this->sizeDen; i++)
-        this->den[i] = CopyPolynom.den[i];
+    init(Num);
 }
+
+template <class TypeOfClass>
+Polynom<TypeOfClass>::Polynom(int Num)
+{
+    init(Num);
+}
+
+//template <class TypeOfClass>
+//Polynom<TypeOfClass>::Polynom(const Polynom<TypeOfClass> &CopyPolynom)
+//{
+//    this->num = initPointer(CopyPolynom.sizeNum);
+//    this->den = initPointer(CopyPolynom.sizeDen);
+
+//    for(int i = 0; i < this->sizeNum; i++)
+//        this->num[i] = CopyPolynom.num[i];
+
+//    for(int i = 0; i < this->sizeDen; i++)
+//        this->den[i] = CopyPolynom.den[i];
+//}
 
 template <class TypeOfClass>
 Polynom<TypeOfClass>::~Polynom()
@@ -69,7 +82,7 @@ void Polynom<TypeOfClass>::init(int NumSize, int DenSize)
 }
 
 template <class TypeOfClass>
-void Polynom<TypeOfClass>::init(string Num)
+void Polynom<TypeOfClass>::init(std::string Num)
 {
     using namespace std;
 
@@ -82,6 +95,7 @@ void Polynom<TypeOfClass>::init(string Num)
         this->num[i] = (TypeOfClass) tempNum.getMat(1, i+1);
 
     this->sizeDen = 1;
+    this->den = initPointer(1);
     this->den[0] = 1;
 
 }
@@ -108,9 +122,10 @@ void Polynom<TypeOfClass>::init(std::string Num, std::string Den)
 }
 
 template <class TypeOfClass>
-TypeOfClass *Polynom::SumPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2)
+TypeOfClass *Polynom<TypeOfClass>::SumPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2)
 {
    TypeOfClass *ret;
+
    int min = SizeValue1, max = SizeValue2;
 
    if(min < SizeValue2)
@@ -123,14 +138,22 @@ TypeOfClass *Polynom::SumPoly(TypeOfClass *value1, TypeOfClass *value2, int Size
    for (int i = 0; i < min; i++)
             ret[max - i] =  value1[SizeValue1 - i] + value2[SizeValue2 - i];
 
+   this->sizeNum = max;
    return ret;
 }
 
 template <class TypeOfClass>
-void Polynom<TypeOfClass>::operator +(Polynom<TypeofClass> P)
+Polynom<TypeOfClass> Polynom<TypeOfClass>::operator +(Polynom<TypeOfClass> P)
 {
+    Polynom<TypeOfClass> ret;
 
-    this->num = SumPoly(this->num, P, this->sizeNum, P.sizeNum);
+    ret = *this;
+    ret.num = SumPoly(P.num, ret.num, P.sizeNum, ret.sizeNum);
+    ret.den = initPointer(1);
+    ret.sizeDen = 1;
+    ret.den[0] = 1;
+
+    return ret;
 }
 
 template <class TypeOfClass>
@@ -139,11 +162,17 @@ void Polynom<TypeOfClass>::operator *(TypeOfClass scalar)
     for (int i = 0; i < this->sizeNum; i++)
         this->num[i] = scalar*this->num[i];
 }
-
 template <class TypeOfClass>
-Polynom<TypeOfClass> operator*(TypeOfClass scalar)
+void Polynom<TypeOfClass>::operator =(Polynom<TypeOfClass> P)
 {
-    return *this*scalar;
+    this->sizeNum = P.sizeNum;
+    this->sizeDen = P.sizeDen;
+
+    for (int i = 0; i < P.sizeNum; i++)
+        this->num[i] = P.num[i];
+
+    for (int i = 0; i < P.sizeDen; i++)
+        this->den[i] = P.den[i];
 }
 
 template <class TypeOfClass>

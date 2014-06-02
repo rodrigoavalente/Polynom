@@ -26,13 +26,16 @@ private:
 public:
     Polynom();
     Polynom(int Num, int Den);
-    Polynom(const Polynom<TypeOfClass> &CopyPolynom);
-    Polynom(std::string Num, string Den);
+    Polynom(int Num);
+    //Polynom(const Polynom<TypeOfClass> &CopyPolynom);
+    Polynom(std::string Num);
+    Polynom(std::string Num, std::string Den);
     ~Polynom();
 
-    void operator+(Polynom<TypeOfClass> P);
+    Polynom<TypeOfClass> operator +(Polynom<TypeOfClass> P);
     void operator*(TypeOfClass scalar);
-    friend Polynom<TypeOfClass> operator*(TypeOfClass scalar);
+    void operator=(Polynom<TypeOfClass> P);
+
 
 //    void insert(int index, float value);
 
