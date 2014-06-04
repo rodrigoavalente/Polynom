@@ -30,24 +30,36 @@ Polynom<TypeOfClass>::Polynom(int Num)
     init(Num);
 }
 
-//template <class TypeOfClass>
-//Polynom<TypeOfClass>::Polynom(const Polynom<TypeOfClass> &CopyPolynom)
-//{
-//    this->num = initPointer(CopyPolynom.sizeNum);
-//    this->den = initPointer(CopyPolynom.sizeDen);
+template <class TypeOfClass>
+Polynom<TypeOfClass>::Polynom(const Polynom<TypeOfClass> &CopyPolynom)
+{
+    this->num = initPointer(CopyPolynom.sizeNum);
+    this->den = initPointer(CopyPolynom.sizeDen);
+    this->sizeNum = CopyPolynom.sizeNum;
+    this->sizeDen = CopyPolynom.sizeDen;
+    this->x = CopyPolynom.x;
 
-//    for(int i = 0; i < this->sizeNum; i++)
-//        this->num[i] = CopyPolynom.num[i];
+    for(int i = 0; i < this->sizeNum; i++)
+        this->num[i] = CopyPolynom.num[i];
 
-//    for(int i = 0; i < this->sizeDen; i++)
-//        this->den[i] = CopyPolynom.den[i];
-//}
+    for(int i = 0; i < this->sizeDen; i++)
+        this->den[i] = CopyPolynom.den[i];
+}
 
 template <class TypeOfClass>
 Polynom<TypeOfClass>::~Polynom()
 {
-    free(this->num);
-    free(this->den);
+    if(this->sizeNum != 0 && this->sizeDen != 0)
+    {
+        free(this->num);
+        free(this->den);
+    }
+
+    this->num = NULL;
+    this->den = NULL;
+
+    this->sizeNum = 0;
+    this->sizeDen = 0;
 }
 
 template <class TypeOfClass>
@@ -97,6 +109,7 @@ void Polynom<TypeOfClass>::init(std::string Num)
     this->sizeDen = 1;
     this->den = initPointer(1);
     this->den[0] = 1;
+    this->x = 's';
 
 }
 
@@ -121,37 +134,23 @@ void Polynom<TypeOfClass>::init(std::string Num, std::string Den)
     this->x = 's';
 }
 
-template <class TypeOfClass>
-TypeOfClass *Polynom<TypeOfClass>::SumPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2)
-{
-   TypeOfClass *ret;
 
-   int min = SizeValue1, max = SizeValue2;
-
-   if(min < SizeValue2)
-   {
-       min = SizeValue2;
-       max = SizeValue1;
-   }
-
-   ret = initPointer(max);
-   for (int i = 0; i < min; i++)
-            ret[max - i] =  value1[SizeValue1 - i] + value2[SizeValue2 - i];
-
-   this->sizeNum = max;
-   return ret;
-}
 
 template <class TypeOfClass>
 Polynom<TypeOfClass> Polynom<TypeOfClass>::operator +(Polynom<TypeOfClass> P)
 {
     Polynom<TypeOfClass> ret;
 
-    ret = *this;
-    ret.num = SumPoly(P.num, ret.num, P.sizeNum, ret.sizeNum);
-    ret.den = initPointer(1);
-    ret.sizeDen = 1;
-    ret.den[0] = 1;
+    ret.num = SumPoly(MultPoly(P.den, this->num, P.sizeDen, this->sizeNum),MultPoly(P.num, this->den, P.sizeNum, this->sizeDen), (P.sizeDen + this->sizeNum - 1),(P.sizeNum + this->sizeDen - 1));
+    ret.den = MultPoly(this->den, P.den, this->sizeDen, P.sizeNum);
+    int max = (P.sizeDen + this->sizeNum - 1);
+
+    if(max < (P.sizeNum + this->sizeDen - 1))
+        max = (P.sizeNum + this->sizeDen - 1);
+
+    ret.sizeNum = max;
+    ret.sizeDen = this->sizeDen + P.sizeDen - 1;
+    ret.x = P.x;
 
     return ret;
 }
@@ -167,12 +166,51 @@ void Polynom<TypeOfClass>::operator =(Polynom<TypeOfClass> P)
 {
     this->sizeNum = P.sizeNum;
     this->sizeDen = P.sizeDen;
+    this->num = initPointer(P.sizeNum);
+    this->den = initPointer(P.sizeDen);
 
     for (int i = 0; i < P.sizeNum; i++)
         this->num[i] = P.num[i];
 
     for (int i = 0; i < P.sizeDen; i++)
         this->den[i] = P.den[i];
+
+    this->x = P.x;
+}
+
+template <class TypeOfClass>
+Polynom<TypeOfClass> Polynom<TypeOfClass>::operator *(Polynom<TypeOfClass> P)
+{
+    Polynom<TypeOfClass> ret;
+
+    ret.num = MultPoly(this->num, P.num, this->sizeNum, P.sizeNum);
+    ret.den = MultPoly(this->den, P.den, this->sizeDen, P.sizeDen);
+    ret.sizeNum = (this->sizeNum + P.sizeNum - 1);
+    ret.sizeDen = (this->sizeDen + P.sizeDen - 1);
+    ret.x = P.x;
+
+    return ret;
+
+}
+
+template <class TypeOfClass>
+TypeOfClass *Polynom<TypeOfClass>::SumPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2)
+{
+   TypeOfClass *ret;
+
+   int min = SizeValue1, max = SizeValue2;
+
+   if(min < SizeValue2)
+   {
+       min = SizeValue2;
+       max = SizeValue1;
+   }
+
+   ret = initPointer(max);
+   for (int i = 1; i <= min; i++)
+       ret[max - i] =  value1[SizeValue1 - i] + value2[SizeValue2 - i];
+
+   return ret;
 }
 
 template <class TypeOfClass>
@@ -181,131 +219,12 @@ TypeOfClass *Polynom<TypeOfClass>::MultPoly(TypeOfClass *value1, TypeOfClass *va
     TypeOfClass *ret;
 
     ret = initPointer(SizeValue1+SizeValue2);
-    for(int i = 0; i <= SizeValue1; i++)
-        for(int j = 0; j <= SizeValue2; j++)
+    for(int i = 0; i < SizeValue1; i++)
+        for(int j = 0; j < SizeValue2; j++)
             ret[i+j] = ret[i+j] +  value1[i]*value2[j];
 
     return ret;
 }
-
-
-//void Polynom::insert(int index, float value)
-//{
-//    this->poly[index] = value;
-//}
-
-//void Polynom::operator =(Polynom poly)
-//{
-//    this->init(poly.degree+1);
-
-//    for(int i = 0; i <= this->degree; i++)
-//        this->poly[i] = poly.poly[i];
-//}
-
-//void Polynom::operator =(std::string value)
-//{
-//    this->init(value);
-//}
-
-
-//Polynom Polynom::operator +(Polynom poly)
-//{
-
-//    Polynom ret;
-
-//    if(this->degree > poly.degree)
-//    {
-//        poly = resize(this->degree, poly);
-//        ret.init(this->degree + 1);
-//        for (int i = 0; i <= this->degree; i++)
-//                ret.poly[i] = this->poly[i] + poly.poly[i];
-//    }
-//    else if (poly.degree > this->degree)
-//    {
-//        poly = resize(poly.degree, poly);
-//        ret.init(poly.degree + 1);
-//        for (int i = 0; i <= poly.degree; i++)
-//                ret.poly[i] = this->poly[i] + poly.poly[i];
-//    }
-//    else
-//    {
-//        ret.init(this->degree);
-//        for(int i = 0; i < ret.degree; i++)
-//            ret.poly[i] = this->poly[i] + poly.poly[i];
-//    }
-
-//    return ret;
-//}
-
-//Polynom Polynom::operator +(float value)
-//{
-//    Polynom ret(this->degree);
-
-//    ret.poly = this->poly;
-//    ret.poly[ret.degree - 1] =  ret.poly[ret.degree - 1] + value;
-
-//    return ret;
-//}
-
-//Polynom Polynom::operator -(Polynom poly)
-//{
-//    Polynom ret;
-
-//    if(this->degree > poly.degree)
-//    {
-//        poly = resize(this->degree, poly);
-//        ret.init(this->degree + 1);
-//        for (int i = 0; i <= this->degree; i++)
-//                ret.poly[i] = this->poly[i] - poly.poly[i];
-//    }
-//    else if (poly.degree > this->degree)
-//    {
-//        poly = resize(poly.degree, poly);
-//        ret.init(poly.degree + 1);
-//        for (int i = 0; i <= poly.degree; i++)
-//                ret.poly[i] = this->poly[i] - poly.poly[i];
-//    }
-//    else
-//    {
-//        ret.init(this->degree);
-//        for(int i = 0; i < ret.degree; i++)
-//            ret.poly[i] = this->poly[i] - poly.poly[i];
-//    }
-
-//    return ret;
-//}
-
-//Polynom Polynom::operator -(float value)
-//{
-//    Polynom ret(this->degree);
-
-//    ret.poly = this->poly;
-//    ret.poly[ret.degree - 1] =  ret.poly[ret.degree - 1] - value;
-
-//    return ret;
-//}
-
-//Polynom Polynom::operator *(Polynom Poly)
-//{
-//   Polynom ret(this->degree+Poly.degree + 1);
-
-//    for(int i = 0; i <= this->degree; i++)
-//        for(int j = 0; j <= Poly.degree; j++)
-//            ret.poly[i+j] = ret.poly[i+j] + this->poly[i]*Poly.poly[j];
-
-//    return ret;
-//}
-
-//Polynom resize(int newsize, Polynom poly)
-//{
-//    Polynom temp;
-
-//    temp = poly;
-//    poly.init(newsize);
-//    for (int i = temp.degree; i > 0; i--)
-//        poly.poly[temp.degree - i + 1] = temp.poly[temp.degree - i];
-//    return poly;
-//}
 
 template <class TypeOfClass>
 void Polynom<TypeOfClass>::print()
