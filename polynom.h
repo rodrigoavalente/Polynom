@@ -20,6 +20,7 @@ private:
     void init(std::string Num, string Den);
     TypeOfClass *initPointer(int Size);
     TypeOfClass *SumPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2);
+    TypeOfClass *SubPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2);
     TypeOfClass *MultPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2);
 
 
@@ -33,6 +34,7 @@ public:
     ~Polynom();
 
     Polynom<TypeOfClass> operator +(Polynom<TypeOfClass> P);
+    Polynom<TypeOfClass> operator -(Polynom<TypeOfClass> P);
     void operator*(TypeOfClass scalar);
     Polynom<TypeOfClass> operator *(Polynom<TypeOfClass> P);
     void operator=(Polynom<TypeOfClass> P);

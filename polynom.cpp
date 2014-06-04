@@ -156,6 +156,25 @@ Polynom<TypeOfClass> Polynom<TypeOfClass>::operator +(Polynom<TypeOfClass> P)
 }
 
 template <class TypeOfClass>
+Polynom<TypeOfClass> Polynom<TypeOfClass>::operator -(Polynom<TypeOfClass> P)
+{
+    Polynom<TypeOfClass> ret;
+
+    ret.num = SubPoly(MultPoly(P.den, this->num, P.sizeDen, this->sizeNum),MultPoly(P.num, this->den, P.sizeNum, this->sizeDen), (P.sizeDen + this->sizeNum - 1),(P.sizeNum + this->sizeDen - 1));
+    ret.den = MultPoly(this->den, P.den, this->sizeDen, P.sizeNum);
+    int max = (P.sizeDen + this->sizeNum - 1);
+
+    if(max < (P.sizeNum + this->sizeDen - 1))
+        max = (P.sizeNum + this->sizeDen - 1);
+
+    ret.sizeNum = max;
+    ret.sizeDen = this->sizeDen + P.sizeDen - 1;
+    ret.x = P.x;
+
+    return ret;
+}
+
+template <class TypeOfClass>
 void Polynom<TypeOfClass>::operator *(TypeOfClass scalar)
 {
     for (int i = 0; i < this->sizeNum; i++)
@@ -211,6 +230,26 @@ TypeOfClass *Polynom<TypeOfClass>::SumPoly(TypeOfClass *value1, TypeOfClass *val
        ret[max - i] =  value1[SizeValue1 - i] + value2[SizeValue2 - i];
 
    return ret;
+}
+
+template <class TypeOfClass>
+TypeOfClass *Polynom<TypeOfClass>::SubPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2)
+{
+    TypeOfClass *ret;
+
+    int min = SizeValue1, max = SizeValue2;
+
+    if(min < SizeValue2)
+    {
+        min = SizeValue2;
+        max = SizeValue1;
+    }
+
+    ret = initPointer(max);
+    for (int i = 1; i <= min; i++)
+        ret[max - i] =  value1[SizeValue1 - i] - value2[SizeValue2 - i];
+
+    return ret;
 }
 
 template <class TypeOfClass>
