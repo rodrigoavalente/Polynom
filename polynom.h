@@ -22,6 +22,8 @@ private:
     TypeOfClass *SumPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2);
     TypeOfClass *SubPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2);
     TypeOfClass *MultPoly(TypeOfClass *value1, TypeOfClass *value2, int SizeValue1, int SizeValue2);
+    bool VefDen(TypeOfClass *den1, TypeOfClass *den2, int sizeden1, int sizeden2);
+
 
 
 public:
@@ -33,28 +35,28 @@ public:
     Polynom(std::string Num, std::string Den);
     ~Polynom();
 
-    Polynom<TypeOfClass> operator +(Polynom<TypeOfClass> P);
-    Polynom<TypeOfClass> operator -(Polynom<TypeOfClass> P);
-    void operator*(TypeOfClass scalar);
-    Polynom<TypeOfClass> operator *(Polynom<TypeOfClass> P);
+    Polynom<TypeOfClass> operator+(Polynom<TypeOfClass> P);
+    Polynom<TypeOfClass> operator+(TypeOfClass scalar);
+    friend Polynom<TypeOfClass> operator+(TypeOfClass scalar, Polynom<TypeOfClass> P){return P+scalar;}
+
+    Polynom<TypeOfClass> operator-(Polynom<TypeOfClass> P);
+    Polynom<TypeOfClass> operator-(TypeOfClass scalar);
+    friend Polynom<TypeOfClass> operator-(TypeOfClass scalar, Polynom<TypeOfClass> P){return (-1)*P+scalar;}
+
+    Polynom<TypeOfClass> operator*(TypeOfClass scalar);
+    Polynom<TypeOfClass> operator*(Polynom<TypeOfClass> P);
+    friend Polynom<TypeOfClass> operator*(TypeOfClass scalar, Polynom<TypeOfClass> P){return P*scalar;}
+
+    Polynom<TypeOfClass> operator/(Polynom<TypeOfClass> P);
+    Polynom<TypeOfClass> operator/(TypeOfClass scalar);
+    friend Polynom<TypeOfClass> operator/(TypeOfClass scalar, Polynom<TypeOfClass> P){return (P^-1)*scalar;}
     void operator=(Polynom<TypeOfClass> P);
 
 
-//    void insert(int index, float value);
+    Polynom<TypeOfClass> operator^(int scalar);
 
-//    void operator=(Polynom poly);
-//    void operator=(std::string value);
-
-//    Polynom operator+(Polynom poly);
-//    Polynom operator+(float value);
-
-//    Polynom operator-(Polynom poly);
-//    Polynom operator-(float value);
-
-//    Polynom operator*(Polynom poly);
-
-
-//    friend Polynom resize(int newsize, Polynom poly);
+    void setNum(TypeOfClass *Num, int sizenum);
+    void setDen(TypeOfClass *Den, int sizeden);
 
     void print();
 };

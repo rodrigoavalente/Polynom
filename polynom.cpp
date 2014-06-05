@@ -3,7 +3,7 @@
 template <class TypeOfClass>
 Polynom<TypeOfClass>::Polynom()
 {
-
+    this->x = 's';
 }
 
 template <class TypeOfClass>
@@ -67,7 +67,6 @@ TypeOfClass *Polynom<TypeOfClass>::initPointer(int Size)
 {
     TypeOfClass *ret;
     ret = (TypeOfClass*)calloc((Size+1),(Size+1)*sizeof(TypeOfClass*));
-
 
     return ret;
 }
@@ -140,19 +139,36 @@ template <class TypeOfClass>
 Polynom<TypeOfClass> Polynom<TypeOfClass>::operator +(Polynom<TypeOfClass> P)
 {
     Polynom<TypeOfClass> ret;
+    int max;
 
-    ret.num = SumPoly(MultPoly(P.den, this->num, P.sizeDen, this->sizeNum),MultPoly(P.num, this->den, P.sizeNum, this->sizeDen), (P.sizeDen + this->sizeNum - 1),(P.sizeNum + this->sizeDen - 1));
-    ret.den = MultPoly(this->den, P.den, this->sizeDen, P.sizeNum);
-    int max = (P.sizeDen + this->sizeNum - 1);
+   if(VefDen(this->den, P.den, this->sizeDen, P.sizeDen))
+   {
+       ret.num = SumPoly(this->num, P.num, this->sizeNum, P.sizeNum);
+       ret.setDen(P.den, P.sizeDen);
 
-    if(max < (P.sizeNum + this->sizeDen - 1))
-        max = (P.sizeNum + this->sizeDen - 1);
+       max = this->sizeNum;
 
-    ret.sizeNum = max;
-    ret.sizeDen = this->sizeDen + P.sizeDen - 1;
-    ret.x = P.x;
+       if (max < P.sizeNum)
+           max = P.sizeNum;
 
-    return ret;
+       ret.sizeNum = max;
+   }
+   else
+   {
+       ret.num = SumPoly(MultPoly(P.den, this->num, P.sizeDen, this->sizeNum),MultPoly(P.num, this->den, P.sizeNum, this->sizeDen), (P.sizeDen + this->sizeNum - 1),(P.sizeNum + this->sizeDen - 1));
+       ret.den = MultPoly(this->den, P.den, this->sizeDen, P.sizeNum);
+
+       max = (P.sizeDen + this->sizeNum - 1);
+
+       if(max < (P.sizeNum + this->sizeDen - 1))
+           max = (P.sizeNum + this->sizeDen - 1);
+
+       ret.sizeNum = max;
+       ret.sizeDen = this->sizeDen + P.sizeDen - 1;
+   }
+
+   return ret;
+
 }
 
 template <class TypeOfClass>
@@ -160,41 +176,43 @@ Polynom<TypeOfClass> Polynom<TypeOfClass>::operator -(Polynom<TypeOfClass> P)
 {
     Polynom<TypeOfClass> ret;
 
-    ret.num = SubPoly(MultPoly(P.den, this->num, P.sizeDen, this->sizeNum),MultPoly(P.num, this->den, P.sizeNum, this->sizeDen), (P.sizeDen + this->sizeNum - 1),(P.sizeNum + this->sizeDen - 1));
-    ret.den = MultPoly(this->den, P.den, this->sizeDen, P.sizeNum);
-    int max = (P.sizeDen + this->sizeNum - 1);
+    P = (-1)*P;
 
-    if(max < (P.sizeNum + this->sizeDen - 1))
-        max = (P.sizeNum + this->sizeDen - 1);
-
-    ret.sizeNum = max;
-    ret.sizeDen = this->sizeDen + P.sizeDen - 1;
-    ret.x = P.x;
+    ret = *this+P;
 
     return ret;
 }
 
 template <class TypeOfClass>
-void Polynom<TypeOfClass>::operator *(TypeOfClass scalar)
+Polynom<TypeOfClass> Polynom<TypeOfClass>::operator *(TypeOfClass scalar)
 {
+    Polynom<TypeOfClass> ret;
+
     for (int i = 0; i < this->sizeNum; i++)
         this->num[i] = scalar*this->num[i];
+
+    ret = *this;
+
+    return ret;
 }
+
+template <class TypeOfClass>
+Polynom<TypeOfClass> Polynom<TypeOfClass>::operator /(Polynom<TypeOfClass> P)
+{
+    Polynom<TypeOfClass> ret;
+
+    ret.setDen(P.num, P.sizeNum);
+    ret.setNum(P.den, P.sizeDen);
+
+    return *this*ret;
+
+}
+
 template <class TypeOfClass>
 void Polynom<TypeOfClass>::operator =(Polynom<TypeOfClass> P)
 {
-    this->sizeNum = P.sizeNum;
-    this->sizeDen = P.sizeDen;
-    this->num = initPointer(P.sizeNum);
-    this->den = initPointer(P.sizeDen);
-
-    for (int i = 0; i < P.sizeNum; i++)
-        this->num[i] = P.num[i];
-
-    for (int i = 0; i < P.sizeDen; i++)
-        this->den[i] = P.den[i];
-
-    this->x = P.x;
+    this->setDen(P.den, P.sizeDen);
+    this->setNum(P.num, P.sizeNum);
 }
 
 template <class TypeOfClass>
@@ -210,6 +228,105 @@ Polynom<TypeOfClass> Polynom<TypeOfClass>::operator *(Polynom<TypeOfClass> P)
 
     return ret;
 
+}
+
+template <class TypeOfClass>
+Polynom<TypeOfClass> Polynom<TypeOfClass>::operator^(int scalar)
+{
+    Polynom<TypeOfClass> ret;
+
+    if(scalar < 0)
+    {
+        ret.setNum(this->den, this->sizeDen);
+        ret.setDen(this->num, this->sizeNum);
+        scalar *= -1;
+    }
+    else if(scalar > 0)
+    {
+        ret = *this;
+        for (int i = 1; i < scalar; i++)
+            ret = ret*ret;
+    }
+    else
+    {
+        ret.num = initPointer(1);
+        ret.num[0] = 1;
+        ret.den = initPointer(1);
+        ret.den[0] = 1;
+        ret.sizeNum = 1;
+        ret.sizeDen = 1;
+    }
+
+    return ret;
+}
+
+template <class TypeOfClass>
+Polynom<TypeOfClass> Polynom<TypeOfClass>::operator+(TypeOfClass scalar)
+{
+    Polynom<TypeOfClass> ret;
+
+    ret.setNum(this->den, this->sizeDen);
+    ret.setDen(this->den, this->sizeDen);
+    ret = *this + (scalar*ret);
+
+    return ret;
+}
+
+template <class TypeOfClass>
+Polynom<TypeOfClass> Polynom<TypeOfClass>::operator-(TypeOfClass scalar)
+{
+    Polynom<TypeOfClass> ret;
+
+    ret.setNum(this->den, this->sizeDen);
+    ret.setDen(this->den, this->sizeDen);
+
+    return *this - (scalar*ret);
+}
+
+template <class TypeOfClass>
+Polynom<TypeOfClass> Polynom<TypeOfClass>::operator/(TypeOfClass scalar)
+{
+    return *this*(1/scalar);
+}
+
+template <class TypeOfClass>
+bool Polynom<TypeOfClass>::VefDen(TypeOfClass *den1, TypeOfClass *den2, int sizeden1, int sizeden2)
+{
+    bool vef = true;
+
+    if (sizeden1 != sizeden2)
+        vef = false;
+    else
+    {
+        for (int i = 0; i < sizeden1; i++)
+            if (den1[i] != den2[2])
+            {
+                break;
+                vef = false;
+            }
+    }
+
+    return vef;
+}
+
+template <class TypeOfClass>
+void Polynom<TypeOfClass>::setNum(TypeOfClass *Num, int sizenum)
+{
+    this->num = initPointer(sizenum);
+    this->sizeNum = sizenum;
+
+    for (int i = 0; i < sizenum; i++)
+        this->num[i] = Num[i];
+}
+
+template <class TypeOfClass>
+void Polynom<TypeOfClass>::setDen(TypeOfClass *Den, int sizeden)
+{
+    this->den = initPointer(sizeden);
+    this->sizeDen = sizeden;
+
+    for (int i = 0; i < sizeden; i++)
+        this->den[i] = Den[i];
 }
 
 template <class TypeOfClass>
@@ -345,3 +462,5 @@ void Polynom<TypeOfClass>::print()
 template class Polynom <int>;
 template class Polynom <float>;
 template class Polynom <double>;
+
+
