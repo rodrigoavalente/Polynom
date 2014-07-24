@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD></HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="FrameName" value="right">
+</OBJECT>
+<UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a5a26fb1c5f840cd422b42de1cf3810b6"><param name="Name" value="operator*"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#ac46cf0626b3b4d6ba2216f1e4c8ad991"><param name="Name" value="operator+"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#ad98eb6a5a83752f26874725554ad04e4"><param name="Name" value="operator-"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#ada104d4f530e5efb33e25d0199b38c47"><param name="Name" value="operator/"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a1a4f41e1aabc14cd7e7e92135abbe21e"><param name="Name" value="operator="></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a4378bcceec215656ced7a3dfe62ac49d"><param name="Name" value="operator^"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html"><param name="Name" value="Polynom"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a5a26fb1c5f840cd422b42de1cf3810b6"><param name="Name" value="operator*"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#ac46cf0626b3b4d6ba2216f1e4c8ad991"><param name="Name" value="operator+"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#ad98eb6a5a83752f26874725554ad04e4"><param name="Name" value="operator-"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#ada104d4f530e5efb33e25d0199b38c47"><param name="Name" value="operator/"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a1a4f41e1aabc14cd7e7e92135abbe21e"><param name="Name" value="operator="></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a4378bcceec215656ced7a3dfe62ac49d"><param name="Name" value="operator^"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a9385d1cd152f3edda6c3d9fabd5ee714"><param name="Name" value="Polynom"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#ad6c7ef73abea2d67e8919cf538e92217"><param name="Name" value="print"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a279fd09569799e6940a9454c96641027"><param name="Name" value="setDen"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a15e2d194fabe8d6a9e0fcda9fd6237cb"><param name="Name" value="setNum"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#ac63320040c062bee44970e1079dff03d"><param name="Name" value="~Polynom"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#ad6c7ef73abea2d67e8919cf538e92217"><param name="Name" value="print"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="md__r_e_a_d_m_e.html"><param name="Name" value="README"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a279fd09569799e6940a9454c96641027"><param name="Name" value="setDen"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#a15e2d194fabe8d6a9e0fcda9fd6237cb"><param name="Name" value="setNum"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_polynom.html#ac63320040c062bee44970e1079dff03d"><param name="Name" value="~Polynom"></OBJECT>
+</UL>
+</BODY>
+</HTML>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD></HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="FrameName" value="right">
+</OBJECT>
+<UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="README"><param name="Local" value="md__r_e_a_d_m_e.html"><param name="ImageNumber" value="11"></OBJECT>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Classes"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Lista de componentes"><param name="Local" value="annotated.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Polynom"><param name="Local" value="class_polynom.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Polynom"><param name="Local" value="class_polynom.html#a9385d1cd152f3edda6c3d9fabd5ee714"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Polynom"><param name="Local" value="class_polynom.html#a44c35ae93ecdd6f978784ca642507e0e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Polynom"><param name="Local" value="class_polynom.html#a8599887a4cd1ed52be870191ef6fa703"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Polynom"><param name="Local" value="class_polynom.html#a4024baeeed368df0608049860b6fef74"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Polynom"><param name="Local" value="class_polynom.html#a7e6323738c6ad112ed6595ec9560517c"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Polynom"><param name="Local" value="class_polynom.html#a9ce083fa7e44f9a44bb7480435db7f32"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~Polynom"><param name="Local" value="class_polynom.html#ac63320040c062bee44970e1079dff03d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator*"><param name="Local" value="class_polynom.html#a5a26fb1c5f840cd422b42de1cf3810b6"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator*"><param name="Local" value="class_polynom.html#a708940eceab9c36a06b5871be4de3bf2"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator+"><param name="Local" value="class_polynom.html#ac46cf0626b3b4d6ba2216f1e4c8ad991"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator+"><param name="Local" value="class_polynom.html#a0d4f9fd63b3d81c87c60c354cd3244c8"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator-"><param name="Local" value="class_polynom.html#ad98eb6a5a83752f26874725554ad04e4"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator-"><param name="Local" value="class_polynom.html#a53b554a685479a3c1156a30bfb8457b0"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator/"><param name="Local" value="class_polynom.html#ada104d4f530e5efb33e25d0199b38c47"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator/"><param name="Local" value="class_polynom.html#a87fb850b52086a3baf41d0c4782103df"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator="><param name="Local" value="class_polynom.html#a1a4f41e1aabc14cd7e7e92135abbe21e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator^"><param name="Local" value="class_polynom.html#a4378bcceec215656ced7a3dfe62ac49d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="print"><param name="Local" value="class_polynom.html#ad6c7ef73abea2d67e8919cf538e92217"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="setDen"><param name="Local" value="class_polynom.html#a279fd09569799e6940a9454c96641027"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="setNum"><param name="Local" value="class_polynom.html#a15e2d194fabe8d6a9e0fcda9fd6237cb"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator*"><param name="Local" value="class_polynom.html#adbe2906590ebb11e8d868078c1a0a3f6"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator+"><param name="Local" value="class_polynom.html#aeba51d0a91379442deae8bb169eb6f1b"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator-"><param name="Local" value="class_polynom.html#a789f4f5de4a98f0aedd2aeb386e21009"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="operator/"><param name="Local" value="class_polynom.html#a1626c7da399106ef01636d21698dc2a9"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="�ndice dos componentes"><param name="Local" value="classes.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Componentes membro"><param name="Local" value="functions.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Tudo"><param name="Local" value="functions.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Funções"><param name="Local" value="functions_func.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  </UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Ficheiros"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Lista de ficheiros"><param name="Local" value="files.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="polynom.h"><param name="Local" value="polynom_8h_source.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  </UL>
+</UL>
+</BODY>
+</HTML>
